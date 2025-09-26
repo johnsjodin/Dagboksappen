@@ -4,6 +4,14 @@
     {
         static void Main(string[] args)
         {
+            Diary diary = new Diary();
+            DisplayMenu(diary);
+        }
+
+        public static void DisplayMenu(Diary diary)
+        {
+            int userMenuChoice;
+
             while (true)
             {
                 Design.AppHeader();
@@ -23,38 +31,31 @@
                 Console.WriteLine("Avsluta programmet");
                 Design.MenuChoiceDesign();
 
-                string userChoice = Console.ReadLine();
+                userMenuChoice = ValidateInput.GetInt();
 
-                if (int.TryParse(userChoice, out int choice))
+                switch (userMenuChoice)
                 {
-                    switch (choice)
-                    {
-                        //case 1:
-                        //    Diary.AddEntry();
-                        //    break;
-                        //case 2:
-                        //    Diary.ListAllEntries();
-                        //    break;
-                        //case 3:
-                        //    Diary.SearchEntryByDate();
-                        //    break;
-                        //case 4:
-                        //    FileHandler.SaveToFile();
-                        //    break;
-                        //case 5:
-                        //    FileHandler.ReadFromFile();
-                        //    break;
-                        case 6:
-                            Console.WriteLine("Avslutar programmet...");
-                            return;
-                        default:
-                            Console.WriteLine("Ogiltigt val. Försök igen.");
-                            break;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Ogiltig inmatning. Vänligen ange en siffra mellan 1 och 6.");
+                    case 1:
+                        diary.AddEntry();
+                        break;
+                    case 2:
+                        diary.ListAllEntries();
+                        break;
+                    //case 3:
+                    //    Diary.SearchEntryByDate();
+                    //    break;
+                    //case 4:
+                    //    FileHandler.SaveToFile();
+                    //    break;
+                    //case 5:
+                    //    FileHandler.ReadFromFile();
+                    //    break;
+                    case 6:
+                        Console.WriteLine("Avslutar programmet...");
+                        return;
+                    default:
+                        Console.WriteLine("Ogiltigt val. Försök igen.");
+                        break;
                 }
             }
         }

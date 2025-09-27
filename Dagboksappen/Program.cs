@@ -44,12 +44,16 @@
                     //case 3:
                     //    Diary.SearchEntryByDate();
                     //    break;
-                    //case 4:
-                    //    FileHandler.SaveToFile();
-                    //    break;
-                    //case 5:
-                    //    FileHandler.ReadFromFile();
-                    //    break;
+                    case 4:
+                        diary.SaveToFile();
+                        Console.WriteLine("Anteckningarna har sparats till fil.");
+                        diary.Pause();
+                        break;
+                    case 5:
+                        diary.LoadFromFile();
+                        Console.WriteLine("Anteckningarna har laddats från fil.");
+                        diary.Pause();
+                        break;
                     case 6:
                         Console.WriteLine("Avslutar programmet...");
                         return;

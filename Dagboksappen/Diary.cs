@@ -2,7 +2,7 @@
 {
     internal class Diary
     {
-        private List<DiaryEntry> _entries = new List<DiaryEntry>();
+        public List<DiaryEntry> _entries = new List<DiaryEntry>();
         private string _filePath = "../../../entries.txt";
 
         public Diary()
@@ -21,12 +21,16 @@
         {
             Console.Clear();
             Design.AppHeader();
+
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Vad har du på hjärtat idag? Skriv av dig:\n");
             Console.ResetColor();
+
             string userEntry = ValidateInput.GetString();
+
             DiaryEntry _entry = new DiaryEntry(DateTime.Now, userEntry);
             _entries.Add(_entry);
+
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("\nInlägget sparat.");
             Console.ResetColor();
@@ -55,6 +59,16 @@
         public static void SearchEntryByDate()
         {
             
+        }
+
+        public void SaveToFile()
+        {
+            FileHandler.SaveEntries(_entries);
+        }
+
+        public void LoadFromFile()
+        {
+            _entries = FileHandler.LoadEntries();
         }
     }
 }

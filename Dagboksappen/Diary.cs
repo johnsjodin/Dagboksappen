@@ -1,64 +1,73 @@
-﻿namespace Dagboksappen
+﻿using System;
+
+namespace Dagboksappen
 {
     internal class Diary
     {
         public List<DiaryEntry> _entries = new List<DiaryEntry>();
-        private string _filePath = "../../../entries.txt";
 
         public Diary()
         {
-            
-        }
-
-        public void Pause()
-        {
-            Console.WriteLine("\nTryck på valfri tangent för att fortsätta...");
-            Console.ReadKey();
-            Console.Clear();
+            _entries = FileHandler.LoadEntries();
         }
 
         public void AddEntry()
         {
-            Console.Clear();
             Design.AppHeader();
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Vad har du på hjärtat idag? Skriv av dig:\n");
-            Console.ResetColor();
+            Design.CyanText("Vad har du på hjärtat idag? Skriv av dig:\n\n");
 
             string userEntry = ValidateInput.GetString();
 
             DiaryEntry _entry = new DiaryEntry(DateTime.Now, userEntry);
             _entries.Add(_entry);
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("\nInlägget sparat.");
-            Console.ResetColor();
-            Pause();
+            Design.CyanText("\nDin dagboksanteckning har sparats!\n");
+            Design.Pause();
         }
 
         public void ListAllEntries()
         {
-            Console.Clear();
             Design.AppHeader();
 
             if (_entries.Count == 0)
             {
-                Console.WriteLine("Inga dagboksinlägg hittades.");
-                Pause();
+                Design.RedText("Inga dagboksinlägg hittades.\n");
+                Design.Pause();
                 return;
             }
-            Console.WriteLine("Alla dagboksinlägg:");
+            Design.CyanText("Alla dagboksinlägg:\n");
             foreach (var entry in _entries)
             {
                 Console.WriteLine($"{entry.Date:yyyy-MM-dd HH:mm} - {entry.Text}");
             }
-            Pause();
+            Design.Pause();
         }
 
-        public static void SearchEntryByDate()
+        public void SearchEntryByDate()
         {
-            
+            Design.AppHeader();
+            Design.CyanText("\nAnge ett datum att söka efter (yyyy-MM-dd): ");
+
+            DateTime searchDate = ValidateInput.GetDate();
+
+            var matchingEntries = _entries.Where(entry => entry.Date.Date == searchDate.Date).ToList();
+
+            Design.AppHeader();
+
+            if (matchingEntries.Count == 0)
+            {
+                Design.RedText($"\nInga anteckningar hittades för datumet {searchDate:yyyy-MM-dd}.\n\n");
+            }
+            else
+            {
+                Design.CyanText($"\nAnteckningar för datumet {searchDate:yyyy-MM-dd}:\n\n");
+                foreach (var entry in matchingEntries)
+                {
+                    Console.WriteLine($"{entry.Date:HH:mm} - {entry.Text}");
+                }
+            }
+            Design.Pause();
         }
 
         public void SaveToFile()

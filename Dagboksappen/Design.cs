@@ -2,33 +2,54 @@
 {
     internal class Design
     {
-        public static void AppHeader()
+        public static void Pause()
+        {
+            Console.Write("\nTryck på valfri tangent för att fortsätta...");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+        public static void CyanText(string text)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("\n  Johns Supersäkra Dagboks-app(tm)");
-            Console.WriteLine("====================================\n\n");
+            Console.Write(text);
             Console.ResetColor();
+        }
+
+        public static void RedText(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(text);
+            Console.ResetColor();
+        }
+
+        public static void GreenText(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(text);
+            Console.ResetColor();
+        }
+
+        public static void AppHeader()
+        {
+            Console.Clear();
+            CyanText("\n  Johns Supersäkra Dagboks-app(tm)\n");
+            CyanText("====================================\n\n\n");
         }
 
         public static void MenuHeader()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("\t\tMENY\n");
-            Console.ResetColor();
+            CyanText("\t\tMENY\n\n");
         }
 
         public static void MenuOptionDesign(int option)
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write($"({option}) ");
-            Console.ResetColor();
+            CyanText($"({option}) ");
         }
 
         public static void MenuChoiceDesign()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write("\nAnge val: ");
-            Console.ResetColor();
+            CyanText("\nAnge val: ");
         }
     }
 }

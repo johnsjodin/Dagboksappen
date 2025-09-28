@@ -37,22 +37,25 @@
                 {
                     case 1:
                         diary.AddEntry();
+                        diary.SaveToFile();
                         break;
                     case 2:
+                        diary.LoadFromFile();
                         diary.ListAllEntries();
                         break;
-                    //case 3:
-                    //    Diary.SearchEntryByDate();
-                    //    break;
+                    case 3:
+                        diary.LoadFromFile();
+                        diary.SearchEntryByDate();
+                        break;
                     case 4:
                         diary.SaveToFile();
                         Console.WriteLine("Anteckningarna har sparats till fil.");
-                        diary.Pause();
+                        Design.Pause();
                         break;
                     case 5:
                         diary.LoadFromFile();
                         Console.WriteLine("Anteckningarna har laddats från fil.");
-                        diary.Pause();
+                        Design.Pause();
                         break;
                     case 6:
                         Console.WriteLine("Avslutar programmet...");

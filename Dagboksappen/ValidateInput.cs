@@ -9,22 +9,22 @@
             while (!int.TryParse(Console.ReadLine(), out intInput))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Felaktig inmatning, försök igen:");
+                Console.Write("Felaktig inmatning, försök igen: ");
                 Console.ResetColor();
             }
             return intInput;
         }
-        public static double GetDouble()
+        public static DateTime GetDate()
         {
-            double doubleInput;
+            DateTime dateInput;
 
-            while (!double.TryParse(Console.ReadLine(), out doubleInput))
+            while (!DateTime.TryParse(Console.ReadLine(), out dateInput))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Felaktig inmatning, försök igen:");
+                Console.Write("Felaktig inmatning, försök igen: ");
                 Console.ResetColor();
             }
-            return doubleInput;
+            return dateInput;
         }
         public static string GetString()
         {
@@ -33,7 +33,7 @@
             while (string.IsNullOrWhiteSpace(stringInput))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Felaktig inmatning, försök igen:");
+                Console.Write("Felaktig inmatning, försök igen: ");
                 Console.ResetColor();
                 stringInput = Console.ReadLine();
             }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Dagboksappen
+﻿namespace Dagboksappen
 {
     internal class Diary
     {
@@ -15,9 +13,14 @@ namespace Dagboksappen
         {
             Design.AppHeader();
 
-            Design.CyanText("Vad har du på hjärtat idag? Skriv av dig:\n\n");
+            Design.CyanText("Vad har du på hjärtat idag?\n\n");
 
             string userEntry = ValidateInput.GetString();
+
+            if (userEntry == null)
+            {
+                return;
+            }
 
             DiaryEntry _entry = new DiaryEntry(DateTime.Now, userEntry);
             _entries.Add(_entry);
@@ -36,7 +39,7 @@ namespace Dagboksappen
                 Design.Pause();
                 return;
             }
-            Design.CyanText("Alla dagboksinlägg:\n");
+            Design.CyanText("Alla dagboksinlägg:\n\n");
             foreach (var entry in _entries)
             {
                 Console.WriteLine($"{entry.Date:yyyy-MM-dd HH:mm} - {entry.Text}");
@@ -50,6 +53,11 @@ namespace Dagboksappen
             Design.CyanText("\nAnge ett datum att söka efter (yyyy-MM-dd): ");
 
             DateTime searchDate = ValidateInput.GetDate();
+
+            if (searchDate == DateTime.MinValue)
+            {
+                return;
+            }
 
             var matchingEntries = _entries.Where(entry => entry.Date.Date == searchDate.Date).ToList();
 

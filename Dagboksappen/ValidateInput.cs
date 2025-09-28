@@ -8,9 +8,9 @@
 
             while (!int.TryParse(Console.ReadLine(), out intInput))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("Felaktig inmatning, försök igen: ");
-                Console.ResetColor();
+                Design.RedText("\nFelaktig inmatning!\n");
+                Design.Pause();
+                break;
             }
             return intInput;
         }
@@ -20,9 +20,9 @@
 
             while (!DateTime.TryParse(Console.ReadLine(), out dateInput))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("Felaktig inmatning, försök igen: ");
-                Console.ResetColor();
+                Design.RedText("\nFelaktig inmatning!\n");
+                Design.Pause();
+                return DateTime.MinValue;
             }
             return dateInput;
         }
@@ -30,14 +30,14 @@
         {
             string stringInput = Console.ReadLine();
 
-            while (string.IsNullOrWhiteSpace(stringInput))
+            if (string.IsNullOrWhiteSpace(stringInput))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("Felaktig inmatning, försök igen: ");
-                Console.ResetColor();
-                stringInput = Console.ReadLine();
+                Design.RedText("\nDu måste skriva något för att spara en anteckning!\n");
+                Design.Pause();
+                return null;
             }
-            return stringInput;
+
+            return stringInput.Trim();
         }
     }
 }

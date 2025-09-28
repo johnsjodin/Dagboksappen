@@ -24,10 +24,13 @@
                 Design.MenuOptionDesign(3);
                 Console.WriteLine("Sök anteckning efter datum");
                 Design.MenuOptionDesign(4);
-                Console.WriteLine("Spara till fil");
+                Console.Write("Ta bort inlägg");
+                Design.RedText(" (Ej implementerat än)\n");
                 Design.MenuOptionDesign(5);
-                Console.WriteLine("Läs från fil");
+                Console.WriteLine("Spara till fil");
                 Design.MenuOptionDesign(6);
+                Console.WriteLine("Läs från fil");
+                Design.MenuOptionDesign(7);
                 Console.WriteLine("Avsluta programmet");
                 Design.MenuChoiceDesign();
 
@@ -48,17 +51,19 @@
                         diary.SearchEntryByDate();
                         break;
                     case 4:
-                        diary.SaveToFile();
-                        Console.WriteLine("Anteckningarna har sparats till fil.");
-                        Design.Pause();
-                        break;
+                    // diary.DeleteEntry(); // Future feature
                     case 5:
-                        diary.LoadFromFile();
-                        Console.WriteLine("Anteckningarna har laddats från fil.");
+                        diary.SaveToFile();
+                        Design.CyanText("\nAnteckningarna har sparats till fil.\n\n");
                         Design.Pause();
                         break;
                     case 6:
-                        Console.WriteLine("Avslutar programmet...");
+                        diary.LoadFromFile();
+                        Design.CyanText("\nAnteckningarna har laddats från fil.\n\n");
+                        Design.Pause();
+                        break;
+                    case 7:
+                        Design.CyanText("\nTack för att du använde Johns Dagboksapp!\n");
                         return;
                     default:
                         Console.WriteLine("Ogiltigt val. Försök igen.");

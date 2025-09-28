@@ -33,8 +33,8 @@
         public static void AppHeader()
         {
             Console.Clear();
-            CyanText("\n  Johns Supersäkra Dagboks-app(tm)\n");
-            CyanText("====================================\n\n\n");
+            CyanText("\n  Johns Dagboks-app(tm)\n");
+            CyanText("=========================\n\n\n");
         }
 
         public static void MenuHeader()

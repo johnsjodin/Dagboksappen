@@ -7,8 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="C:\Users\sjodi\source\repos\Dagboksappen\README.md" Link="README.md" />
-  </ItemGroup>
-
 </Project>

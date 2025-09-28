@@ -23,9 +23,9 @@
             Console.ResetColor();
         }
 
-        public static void GreenText(string text)
+        public static void YellowText(string text)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(text);
             Console.ResetColor();
         }

@@ -24,8 +24,7 @@
                 Design.MenuOptionDesign(3);
                 Console.WriteLine("Sök anteckning efter datum");
                 Design.MenuOptionDesign(4);
-                Console.Write("Ta bort inlägg");
-                Design.RedText(" (Ej implementerat än)\n");
+                Console.WriteLine("Ta bort inlägg efter datum");
                 Design.MenuOptionDesign(5);
                 Console.WriteLine("Spara till fil");
                 Design.MenuOptionDesign(6);
@@ -51,7 +50,9 @@
                         diary.SearchEntryByDate();
                         break;
                     case 4:
-                    // diary.DeleteEntry(); // Future feature
+                        diary.DeleteEntryByDate();
+                        diary.SaveToFile();
+                        break;
                     case 5:
                         diary.SaveToFile();
                         Design.CyanText("\nAnteckningarna har sparats till fil.\n\n");

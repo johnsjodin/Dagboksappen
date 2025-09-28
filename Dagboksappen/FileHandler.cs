@@ -1,57 +1,66 @@
-﻿namespace Dagboksappen
+﻿using System.Text.Json;
+
+namespace Dagboksappen
 {
     internal class FileHandler
     {
-        private const string FilePath = "../../../entries.txt";
-        private const string DateFormat = "yyyy:MM:dd HH:mm";
+        private const string FilePath = "../../../entries.json";
 
-        public static void SaveEntries(List<DiaryEntry> entries)
+        // Spara hela dictionaryn som JSON
+        public static void SaveEntries(Dictionary<DateTime, DiaryEntry> entries)
         {
             try
             {
-                var lines = new List<string>();
-                foreach (var entry in entries)
+                var options = new JsonSerializerOptions
                 {
-                    string line = $"{entry.Date.ToString(DateFormat)}|{entry.Text}";
-                    lines.Add(line);
-                }
+                    WriteIndented = true // för snygg formatering
+                };
 
-                File.WriteAllLines(FilePath, lines);
+                // Serialisera och skriv till fil
+                string json = JsonSerializer.Serialize(entries, options);
+                File.WriteAllText(FilePath, json);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Ett fel uppstod vid sparning: {ex.Message}");
+                LogError($"SaveEntries: {ex.Message}");
             }
         }
 
-        public static List<DiaryEntry> LoadEntries()
+        // Ladda hela dictionaryn från JSON
+        public static Dictionary<DateTime, DiaryEntry> LoadEntries()
         {
-            var entries = new List<DiaryEntry>();
-
             try
             {
                 if (!File.Exists(FilePath))
-                    return entries;
+                    return new Dictionary<DateTime, DiaryEntry>();
 
-                string[] lines = File.ReadAllLines(FilePath);
+                string json = File.ReadAllText(FilePath);
+                var entries = JsonSerializer.Deserialize<Dictionary<DateTime, DiaryEntry>>(json);
 
-                foreach (var line in lines)
-                {
-                    string[] parts = line.Split('|', 2);
-                    if (parts.Length == 2 &&
-                        DateTime.TryParseExact(parts[0], DateFormat, null,
-                            System.Globalization.DateTimeStyles.None, out DateTime date))
-                    {
-                        entries.Add(new DiaryEntry(date, parts[1]));
-                    }
-                }
+                return entries ?? new Dictionary<DateTime, DiaryEntry>();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Ett fel uppstod vid laddning: {ex.Message}");
+                LogError($"LoadEntries: {ex.Message}");
+                return new Dictionary<DateTime, DiaryEntry>();
             }
+        }
 
-            return entries;
+        private static void LogError(string message)
+        {
+            string logFilePath = "../../../error.log";
+            string logMessage = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {message}";
+
+            try
+            {
+                File.AppendAllText(logFilePath, logMessage + Environment.NewLine);
+            }
+            catch
+            {
+                // Om loggning misslyckas, gör inget för att undvika att krascha programmet
+            }
         }
     }
 }

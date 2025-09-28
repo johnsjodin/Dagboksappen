@@ -36,7 +36,6 @@
                 Design.Pause();
                 return null;
             }
-
             return stringInput.Trim();
         }
     }

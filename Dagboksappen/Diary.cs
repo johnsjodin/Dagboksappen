@@ -74,6 +74,10 @@
                 Design.CyanText($"\nAnteckning för datumet {searchDate:yyyy-MM-dd}:\n\n");
                 Console.WriteLine($"{entry.Text}");
             }
+            else if (searchDate == DateTime.MinValue)
+            {
+                return;
+            }
             else
             {
                 Design.RedText($"\nInga anteckningar hittades för datumet {searchDate:yyyy-MM-dd}.\n");
@@ -92,6 +96,10 @@
             if (_entriesByDate.Remove(dateToDelete.Date))
             {
                 Design.CyanText($"\nInlägget för datumet {dateToDelete:yyyy-MM-dd} har tagits bort.\n");
+            }
+            else if (dateToDelete == DateTime.MinValue)
+            {
+                return;
             }
             else
             {

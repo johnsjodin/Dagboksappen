@@ -67,7 +67,8 @@
                         Design.CyanText("\nTack för att du använde Johns Dagboksapp!\n");
                         return;
                     default:
-                        Console.WriteLine("Ogiltigt val. Försök igen.");
+                        Design.RedText("\nFelaktig inmatning!\n");
+                        Design.Pause();
                         break;
                 }
             }
